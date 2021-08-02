@@ -175,4 +175,75 @@ public class CategoryResource {
 1. Rest class controllers needs a decorator before declaration called `@RestController`.
 2. We create another decorator `@RequestMapping(value="/categories")` parsing the endpoint
 3. For this example, we create a GET Route, so we add a `@RequestMapping(method = RequestMethod.GET)` decorator before method.
-4. 
+
+### Creating a DomainClass
+
+Category
+````java
+package com.brunosana.course.domain;
+
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Category implements Serializable {
+    public static final Long serialVersionUID = 1L;
+
+    private Integer id;
+    private String name;
+
+    public Category(){}
+
+    public  Category(Integer id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
+    public Integer getId(){
+        return id;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setId(Integer id){
+        this.id = id;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(id, category.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+}
+````
+
+New get Method on _RestController_:
+````java
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Category> list(){
+        Category category = new Category(1, "Info");
+        Category categoryTwo = new Category(2, "Office");
+        List<Category> list= new ArrayList<>();
+        list.add(category);
+        list.add(categoryTwo);
+        return list;
+    }
+````
+
+1. Needs a constructor
+2. Needs getters and setters
+3. Needs `hashCode` and `equals` methods to compare objects
+4. Needs to implements Serializable (Talks java that the current class can be converted from a bit sequence)
+
