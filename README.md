@@ -151,5 +151,15 @@ To change default port and other configs, you can change the `application.proper
 server.port = ${port:3333}
 ````
 
-### Creating a Management Repository
+### REST Controllers
 
+In main package we need to create a subpackage called `resourses`.
+Create inside the new package a `Category Class` called `CategoryResource`:
+
+````java
+````
+
+1. Rest class controllers needs a decorator before declaration called `@RestController`.
+2. We create another decorator `@RequestMapping(value="/categories")` parsing the endpoint
+3. For this example, we create a GET Route, so we add a `@RequestMapping(method = RequestMethod.GET)` decorator before method.
+4. 
