@@ -157,6 +157,19 @@ In main package we need to create a subpackage called `resourses`.
 Create inside the new package a `Category Class` called `CategoryResource`:
 
 ````java
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(value="/categories")
+public class CategoryResource {
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String list(){
+        return "List method working";
+    }
+}
 ````
 
 1. Rest class controllers needs a decorator before declaration called `@RestController`.
