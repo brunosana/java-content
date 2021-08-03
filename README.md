@@ -247,3 +247,40 @@ New get Method on _RestController_:
 3. Needs `hashCode` and `equals` methods to compare objects
 4. Needs to implements Serializable (Talks java that the current class can be converted from a bit sequence)
 
+### Create a H2 Test Database
+
+> H2 it's a databases used for tests, running local and with low memory
+
+To create a H2, we will use this dependencies:
+
+````xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+</dependency>
+````
+
+In `src/main/static/application.properties` we add:
+
+````
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.username=sa
+spring.datasource.password=
+spring.datasource.driver-class-name=org.h2.Driver
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+````
+
+So now we can run the application and go to the `/h2` path. If we can connect, it's working (With decorators on Entity Domain Classes)!
